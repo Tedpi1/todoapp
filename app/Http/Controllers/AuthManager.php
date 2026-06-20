@@ -10,7 +10,15 @@ class AuthManager extends Controller
         return view('auth.login');
     }
 
+    function register(){
+        return view('auth.signup');
+    }
+
     function loginPost(Request $request){
 
+    }
+
+    function home(){
+        return view('notes.home');
     }
 }
