@@ -8,7 +8,7 @@
             <p class="text-muted">Securely access your tasks and notes</p>
         </div>
 
-        <form action="{{ route('login') }}" method="POST">
+        <form action="{{ route('login.post') }}" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
@@ -27,6 +27,16 @@
                 </div>
                 <a href="#" class="text-decoration-none">Forgot Password?</a>
             </div>
+             @if (session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session()->get('error') }}
+                </div>
+            @endif
 
             <button type="submit" class="btn btn-primary btn-lg w-100">Sign In</button>
             <div class="mt-3 text-center">

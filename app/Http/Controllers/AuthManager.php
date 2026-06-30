@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthManager extends Controller
 {
@@ -20,6 +23,15 @@ class AuthManager extends Controller
             'password'=>'required|min:8'
         ]);
         $user= new User();
+        $user->name= $request->name;
+        $user->email= $request->email;
+        $user->password = Hash::make($request->password);
+        if($user->save()){
+            return redirect(route('login'))
+            ->with('success','You have registered successfully');
+        }
+        return redirect(route('register'))
+        ->with('error','Registration Failed');
     }
 
     function loginPost(Request $request){
@@ -35,6 +47,7 @@ class AuthManager extends Controller
         return redirect(route('login'))->with('error','Login details are not valid'); //redirect to login page with error message
 
     }
+
 
     function home(){
         return view('notes.home');

@@ -8,8 +8,8 @@
     <link href="{{ asset("assets/css/app.css") }}" rel="stylesheet" >
   </head>
   <body>
-    
-      @yield('content')
+    @include('include.header')
+    @yield('content')
 
     <script src="{{ asset("assets/js/bootstrap.min.js") }} "></script>
   </body>
