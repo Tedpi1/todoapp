@@ -28,5 +28,6 @@ Route::middleware('auth')->group(function(){
     Route::get('/', [TaskManager::class, 'listTask'])->name('home');
     Route::get('/add-task', [TaskManager::class, 'addTask'])->name('add.task');
     Route::post('/add-task', [TaskManager::class, 'addTaskPost'])->name('add.task.post');
+    Route::get('/update-task/{id}', [TaskManager::class, 'updateTask'])->name('update.task.update');
 });
 

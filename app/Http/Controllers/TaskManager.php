@@ -29,4 +29,11 @@ class TaskManager extends Controller
         }
         return redirect(route('add.task'))->with('error','Task not added');
     }
+
+    function updateTask($id){
+        if(Notes::where('id', $id)->update(['status'=> 'completed'])){
+            return redirect(route('home'))->with('success','Notes Done successfully');
+        }
+        return redirect(route('home'))->with('error','Notes not Dpme');
+    }
 }

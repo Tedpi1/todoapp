@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container py-5">
-    {{ $notes }}
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>My Notes</h1>
@@ -12,14 +11,24 @@
     <!-- Notes Grid -->
     <div class="row">
 
+        @foreach ($notes as $note )
         <div class="col-md-4 mb-4">
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">How to cook</h5>
-                    <p class="card-text">Just Believe</p>
+                    <h5 class="card-title">{{ $note->title }}</h5>
+                    <p class="card-text">{{ $note->content }}</p>
                 </div>
                 <div class="card-footer bg-transparent border-0 d-flex gap-2">
-                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                    <p class="card-title">{{ $note->date }}</p>
+                    @if ($note->status === 'pending')
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    @else
+                        <span class="badge bg-success">Completed</span>
+                    @endif
+                        <a href="{{ route('update.task.update', $note->id) }}"
+                        class="btn btn-sm btn-outline-primary">
+                            Mark Complete
+                        </a>
                     <form action="" method="POST">
                         {{-- @csrf @method('DELETE') --}}
                         <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
@@ -27,6 +36,7 @@
                 </div>
             </div>
         </div>
+        @endforeach
 
     </div>
     <!-- Add Note Modal -->
